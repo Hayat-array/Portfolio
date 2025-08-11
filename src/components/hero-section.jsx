@@ -10,7 +10,7 @@ const skills = [
   "Full-Stack Developer",
   "React Specialist",
   "Next.js Enthusiast",
-  "UI/UX Designer",
+  // "UI/UX Designer",
 ];
 
 export function HeroSection() {
@@ -81,14 +81,14 @@ export function HeroSection() {
         className="flex items-center justify-center min-h-screen pt-16 md:pt-0"
       >
         <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-primary font-headline">
+            <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl text-primary font-headline">
                 Hayat Ali
             </h1>
-            <p className="text-xl mt-10 md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="max-w-3xl mx-auto mt-10 mb-8 text-xl md:text-2xl text-muted-foreground">
               A passionate Full-Stack Developer creating modern, responsive, and
               user-friendly web applications.
             </p>
-            {/* <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            {/* <p className="max-w-3xl mx-auto mb-8 text-xl md:text-2xl text-muted-foreground">
               A passionate Full-Stack Developer creating modern, responsive, and
               user-friendly web applications.
             </p> */}
@@ -103,30 +103,30 @@ export function HeroSection() {
       className="flex items-center justify-center min-h-screen pt-16 md:pt-0"
     >
       <div className="text-center">
-        <div className="h-24 flex flex-col mt-24 items-center justify-center">
-          <div className='mt-10 flex justify-center align-center img1 items-center'>
+        <div className="flex flex-col items-center justify-center h-24 mt-24">
+          <div className='flex items-center justify-center mt-10 align-center img1'>
             <img style={{ maxWidth: "100%",height: "auto",borderRadius: "100%",marginTop: "122px"}} src='/hayat.png' width={200}></img>
           </div>
           {isNameVisible ? (
             <>
-                <h1 className="text-4xl mt-10 md:text-6xl font-bold tracking-tight text-primary font-headline fade-in-up">
+                <h1 className="mt-10 text-4xl font-bold tracking-tight md:text-6xl text-primary font-headline fade-in-up">
                   Hayat Ali
                 </h1>
             </>
           ) : (
-            <p className="text-3xl mt-10 md:text-4xl text-muted-foreground max-w-3xl mx-auto font-semibold fade-in-up">
+            <p className="max-w-3xl mx-auto mt-10 text-3xl font-semibold md:text-4xl text-muted-foreground fade-in-up">
               {currentSkill}
               <span className="animate-pulse">|</span>
             </p>
           )}
         </div>
        <div className='mt-64'>
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 fade-in-up" style={{animationDelay: '0.2s'}}>
+        <p className="max-w-3xl mx-auto mb-8 text-xl md:text-2xl text-muted-foreground fade-in-up" style={{animationDelay: '0.2s'}}>
           A passionate Full-Stack Developer creating modern, responsive, and
           user-friendly web applications.
         </p>
-        <div className="flex justify-center items-center gap-4 fade-in-up" style={{animationDelay: '0.4s'}}>
-          <Button asChild size="lg" className="animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50 transition-shadow">
+        <div className="flex items-center justify-center gap-4 fade-in-up" style={{animationDelay: '0.4s'}}>
+          <Button asChild size="lg" className="transition-shadow animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50">
             <Link href="#contact">
               Get in Touch <ArrowRight className="ml-2" />
             </Link>

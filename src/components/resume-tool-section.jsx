@@ -78,24 +78,24 @@ export function ResumeToolSection() {
   const [activeAchievementIndex, setActiveAchievementIndex] = useState(null);
 
   return (
-    <Section id="resume-tool" className="fade-in-up py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">
+    <Section id="resume-tool" className="py-16 fade-in-up">
+      <div className="mb-12 text-center">
+        <h2 className="mb-4 text-3xl font-bold md:text-4xl font-headline">
           Achievements & Certificates
         </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
           A passionate self-learner dedicated to turning ideas into real projects through consistent learning and hands-on practice.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 ml-5 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 ml-5 md:grid-cols-2 lg:grid-cols-3">
   {achievements.map((achievement, index) => (
     <Card
       key={index}
       onClick={() =>
         setActiveAchievementIndex(index === activeAchievementIndex ? null : index)
       }
-      className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer"
+      className="overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       <CardHeader className="p-0">
@@ -105,7 +105,7 @@ export function ResumeToolSection() {
             alt={achievement.title}
             width={600}
             height={400}
-            className="w-full h-auto object-cover rounded-b"
+            className="object-cover w-full h-auto rounded-b"
           />
         ) : (
           <div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
@@ -120,7 +120,7 @@ export function ResumeToolSection() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="lucide lucide-arrow-right ml-2"
+              className="ml-2 lucide lucide-arrow-right"
             >
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
@@ -130,7 +130,7 @@ export function ResumeToolSection() {
       </CardHeader>
       <CardContent className="p-6">
         <CardTitle className="text-lg ">{achievement.title}</CardTitle>
-        <p className="text-muted-foreground mt-2">{achievement.description}</p>
+        <p className="mt-2 text-muted-foreground">{achievement.description}</p>
       </CardContent>
     </Card>
   ))}
@@ -138,12 +138,12 @@ export function ResumeToolSection() {
     </Section>
   );
 }
-{/* <div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
+<div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
                   Click to view certificate
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right ml-2"><path d="M5 12h14"></path>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 lucide lucide-arrow-right"><path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
-                </div> */}
+                </div> 
 // 'use client';
 
 // import { useState } from 'react';
@@ -210,17 +210,17 @@ export function ResumeToolSection() {
 //   const [activeIndex, setActiveIndex] = useState(null);
 
 //   return (
-//     <Section id="resume-tool" className="bg-secondary/20 py-16 fade-in-up">
-//       <div className="text-center mb-12">
-//         <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">
+//     <Section id="resume-tool" className="py-16 bg-secondary/20 fade-in-up">
+//       <div className="mb-12 text-center">
+//         <h2 className="mb-4 text-3xl font-bold md:text-4xl font-headline">
 //           Achievements & Certificates
 //         </h2>
-//         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+//         <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
 //           A passionate self-learner dedicated to turning ideas into real projects through consistent learning and hands-on practice.
 //         </p>
 //       </div>
 
-//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+//       <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3">
 //         {achievements.map((achievement, index) => (
 //           <Card
 //             key={index}
@@ -235,10 +235,10 @@ export function ResumeToolSection() {
 //                 <img
 //                   src={achievement.image}
 //                   alt={achievement.title}
-//                   className="w-full rounded-lg shadow-lg transition-all duration-300"
+//                   className="w-full transition-all duration-300 rounded-lg shadow-lg"
 //                 />
 //               ) : (
-//                 <p className="text-muted-foreground text-center">
+//                 <p className="text-center text-muted-foreground">
 //                   Click to view certificate
 //                 </p>
 //               )}
@@ -318,13 +318,13 @@ export function ResumeToolSection() {
 //   return (
 //     <Section id="resume-tool" className="bg-secondary/20 fade-in-up">
 //       <div className="text-center">
-//         <h2 className="text-3xl md:text-4xl font-bold mb-4 font-headline">Acheivements</h2>
-//         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+//         <h2 className="mb-4 text-3xl font-bold md:text-4xl font-headline">Acheivements</h2>
+//         <p className="max-w-2xl mx-auto mb-12 text-lg text-muted-foreground">
 //           A passionate self-learner dedicated to turning ideas into real projects through consistent learning and hands-on practice.
 //         </p>
 //       </div>
 
-//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+//       <div className="grid items-start grid-cols-1 gap-8 lg:grid-cols-2">
 //         {/* <Card>
 //           <CardHeader>
 //             <CardTitle>Input Your Details</CardTitle>
@@ -383,15 +383,15 @@ export function ResumeToolSection() {
 //                     </FormItem>
 //                   )}
 //                 />
-//                 <Button type="submit" disabled={isPending} className="w-full animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50 transition-shadow">
+//                 <Button type="submit" disabled={isPending} className="w-full transition-shadow animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50">
 //                   {isPending ? (
 //                     <>
-//                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+//                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
 //                       Adapting...
 //                     </>
 //                   ) : (
 //                     <>
-//                       <Wand2 className="mr-2 h-4 w-4" />
+//                       <Wand2 className="w-4 h-4 mr-2" />
 //                       Adapt with AI
 //                     </>
 //                   )}
@@ -411,7 +411,7 @@ export function ResumeToolSection() {
 //               value={adaptedPoints}
 //               placeholder="Your AI-generated resume points will appear here..."
 //               rows={isPending ? 20 : Math.max(10, adaptedPoints.split('\n').length + 2)}
-//               className="bg-muted/50 transition-all duration-300"
+//               className="transition-all duration-300 bg-muted/50"
 //             />
 //           </CardContent>
 //         </Card> */}

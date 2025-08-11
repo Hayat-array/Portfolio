@@ -34,7 +34,7 @@ export function Header() {
       <Button
         variant="ghost"
         onClick={() => isMobile && setMobileMenuOpen(false)}
-        className={cn('w-full justify-start text-foreground/80 hover:text-foreground hover:bg-accent hover:text-accent-foreground', !isMobile && 'w-auto')}
+        className={cn('w-full justify-start text-foreground/80 hover:bg-accent hover:text-accent-foreground', !isMobile && 'w-auto')}
       >
         {label}
       </Button>
@@ -50,15 +50,15 @@ export function Header() {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto px-4">
+      <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between h-16">
-          <Link href="#home" className="flex items-center gap-2 font-bold text-lg">
-            {/* <CodeXml className="h-6 w-6 text-primary" /> */}
-            <img className=" w-8 text-primary" src="/favico.png"  alt="" />
+          <Link href="#home" className="flex items-center gap-2 text-lg font-bold">
+            {/* <CodeXml className="w-6 h-6 text-primary" /> */}
+            <img className="w-8 text-primary" src="/favico.png"  alt="" />
             <span>Personal Portfolio</span>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="items-center hidden space-x-1 md:flex">
             {navLinks.map((link) => (
               <NavLink key={link.href} {...link} />
             ))}
@@ -74,7 +74,7 @@ export function Header() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[240px]">
-                  <div className="flex flex-col space-y-4 pt-8">
+                  <div className="flex flex-col pt-8 space-y-4">
                     {navLinks.map((link) => (
                       <NavLink key={link.href} {...link} isMobile />
                     ))}
