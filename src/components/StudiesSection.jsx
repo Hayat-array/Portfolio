@@ -7,42 +7,38 @@ import { Section } from './section';
 
 const studies = [
   {
-    title: 'B.Tech 2nd Year 4th Semester',
-    description: '',
+    title: 'B.Tech 2nd Year 4th Semester Result',
+    description: 'Academic performance and results for the fourth semester of the B.Tech program.',
     image: '/certificates/infosys.png',
   },
-  ,
   {
-    title: 'B.Tech 2nd Year 3rd Semester',
-    description: '',
+    title: 'B.Tech 2nd Year 3rd Semester Result',
+    description: 'Academic record for the third semester, showcasing foundational engineering subjects.',
     image: '/certificates/tech-probe.jpg',
   },
-  ,
   {
-    title: 'B.Tech 1nd Year 2nd Semester',
-    description: '',
+    title: 'B.Tech 1st Year 2nd Semester Result',
+    description: 'Successful completion of the second semester in the bachelor of technology journey.',
     image: '/study/RTU_2nd_Sem_Result.png',
   },
-  ,
   {
-    title: 'B.Tech 1th Year 1st Semester',
-    description: '',
+    title: 'B.Tech 1st Year 1st Semester Result',
+    description: 'Initial academic performance and foundation in engineering studies.',
     image: '/study/Rtu_1st.jpg',
   },
-  ,
   {
-    title: 'Jee Main Result',
-    description: '',
+    title: 'JEE Main Score Card',
+    description: 'Rank and performance in the Joint Entrance Examination for engineering admissions.',
     image: '/study/jeemain.png',
   },
   {
-    title: '12th Rajasthan Board Secondary Eduction',
-    description: '',
+    title: '12th Grade - Rajasthan Board Education',
+    description: 'Higher Secondary education certificate from the Rajasthan Board of Secondary Education.',
     image: '/study/12th.png',
   },
   {
-    title: '10th Rajasthan Board Secondary Eduction',
-    description: '',
+    title: '10th Grade - Rajasthan Board Education',
+    description: 'Secondary education certificate from the Rajasthan Board of Secondary Education.',
     image: '/study/10th.png',
   },
   {

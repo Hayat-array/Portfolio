@@ -6,17 +6,57 @@ import Image from 'next/image';
 import { Section } from './section';
 
 const achievements = [
-   {
-    title: 'Machine Learning - Infosys Springboard',
-    description: 'Completed a certified course in Machine Learning using Python.',
-    image: '/certificates/infosys.png',
+  {
+    title: 'Adobe India Hackathon - Round 1',
+    description: 'Participated in Round 1 Online MCQ Assessment + Coding of Adobe India Hackathon organized by Adobe & Unstop.',
+    image: '/certificates/adobe_hackathon.png',
   },
   {
-    title: 'Machine Learning Certificate From Infosys Spring-Board',
-    description: 'Completed a certified course in Machine Learning using Python.',
+    title: 'Tata Crucible Campus Quiz 2025',
+    description: 'Participated in Prelims Level 1 of the Tata Crucible Campus Quiz 2025, demonstrating commitment to national level competitions.',
+    image: '/certificates/tata_crucible.png',
+  },
+  {
+    title: 'GitHub & Open Source Workshop - Coding Ninjas',
+    description: 'Participated in a hands-on workshop on GitHub & Open Source Contribution conducted by 10X Club- Coding Ninjas.',
+    image: '/certificates/coding_ninjas_github.png',
+  },
+  {
+    title: 'Technology Entrepreneurship & Logical Reasoning',
+    description: 'Certified in Technology Entrepreneurship (Stanford) and Logical Reasoning (CareerRide) via Cursa platform.',
+    image: '/certificates/stanford_cursa.png',
+  },
+  {
+    title: 'Innovicion Hackathon - ICI FEST 25',
+    description: 'Participated in the Innovicion Hackathon during ICI FEST 25 at Swami Keshvanand Institute of Technology.',
+    image: '/certificates/ici_fest_hackathon.png',
+  },
+  {
+    title: 'DKMS BMST Blood Stem Cell Donor',
+    description: 'Registered as a potential blood stem cell donor with DKMS BMST Foundation India to help delete blood cancer.',
+    image: '/certificates/dkms_donor.png',
+  },
+  {
+    title: 'R-CAT Advanced Technology Program',
+    description: 'Admission and participation in Rajasthan Centre of Advanced Technology (R-CAT) for advanced technical studies.',
+    image: '/certificates/rcat_admit.png',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure 2025 Certified Professional',
+    description: 'Certified expert in OCI Data Science, covering machine learning model lifecycle, cloud architecture, and optimization.',
+    image: '/certificates/oracle_v2.png',
+  },
+  {
+    title: 'Agentforce Champion & Innovator',
+    description: 'Mastered Agentforce concepts and implemented autonomous AI agents to drive business outcomes.',
+    image: '/certificates/agentforce.jpg',
+  },
+  {
+    title: 'Machine Learning - Infosys Springboard',
+    description: 'Completed a comprehensive certified course in Machine Learning using Python and data science frameworks.',
     image: '/certificates/Machine-Learning.png',
   },
-   {
+  {
     title: 'PHP & MySQL Development',
     description: 'Learned backend development using PHP and MySQL.',
     image: '/certificates/php.jpg',
@@ -28,10 +68,10 @@ const achievements = [
   },
   {
     title: 'Coding Ninjas Certificate',
-    description: '',
+    description: 'Certified in various coding challenges and programming fundamentals through the Coding Ninjas platform.',
     image: '/certificates/code.png',
   },
- {
+  {
     title: 'Web Development - Tech Probe',
     description: 'Attended workshop on HTML, CSS, JS & React for building websites.',
     image: '/certificates/Tech_probe.png',
@@ -42,33 +82,23 @@ const achievements = [
     image: '/certificates/c.png',
   },
   {
-    title: 'Review Paper Publication Certificate',
-    description: '',
+    title: 'Review Paper Publication',
+    description: 'Awarded for publishing a research review paper in a recognized academic journal.',
     image: '/certificates/revid.jpg',
   },
   {
     title: 'Blood Donation Certificate',
-    description: '',
-    image: '/certificates/blood_donation.jpg',
-  },
-  {
-    title: 'Blood Donation Certificate By Re Life Blood Center',
-    description: '',
+    description: 'Recognized for contributing to life-saving blood donation drives at Re Life Blood Center.',
     image: '/certificates/blood.jpg',
   },
   {
-    title: 'Logical Reasoning Certificate By CareerRide',
-    description: '',
-    image: '/certificates/Logical.png',
-  },
-  {
-    title: 'Say No Drugs Certificate From Narcotics Control Bureau',
-    description: '',
+    title: 'National Narcotics Control Bureau Certificate',
+    description: 'Certified participant in the "Say No to Drugs" national initiative by the Narcotics Control Bureau.',
     image: '/certificates/NBC.png',
   },
   {
-    title: 'Say No Tobaco Certificate From Government',
-    description: '',
+    title: 'Say No To Tobacco Awareness',
+    description: 'Certified for participating in the government initiative for tobacco awareness and prevention.',
     image: '/certificates/No-tobaco.png',
   },
 ];
@@ -89,334 +119,52 @@ export function ResumeToolSection() {
       </div>
 
       <div className="grid grid-cols-1 gap-8 ml-5 md:grid-cols-2 lg:grid-cols-3">
-  {achievements.map((achievement, index) => (
-    <Card
-      key={index}
-      onClick={() =>
-        setActiveAchievementIndex(index === activeAchievementIndex ? null : index)
-      }
-      className="overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
-      <CardHeader className="p-0">
-        {activeAchievementIndex === index ? (
-          <Image
-            src={achievement.image}
-            alt={achievement.title}
-            width={600}
-            height={400}
-            className="object-cover w-full h-auto rounded-b"
-          />
-        ) : (
-          <div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
-            Click to view certificate
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="ml-2 lucide lucide-arrow-right"
-            >
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </div>
-        )}
-      </CardHeader>
-      <CardContent className="p-6">
-        <CardTitle className="text-lg ">{achievement.title}</CardTitle>
-        <p className="mt-2 text-muted-foreground">{achievement.description}</p>
-      </CardContent>
-    </Card>
-  ))}
-</div>
+        {achievements.map((achievement, index) => (
+          <Card
+            key={index}
+            onClick={() =>
+              setActiveAchievementIndex(index === activeAchievementIndex ? null : index)
+            }
+            className="overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2"
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <CardHeader className="p-0">
+              {activeAchievementIndex === index ? (
+                <Image
+                  src={achievement.image}
+                  alt={achievement.title}
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-auto rounded-b"
+                />
+              ) : (
+                <div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
+                  Click to view certificate
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="ml-2 lucide lucide-arrow-right"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </div>
+              )}
+            </CardHeader>
+            <CardContent className="p-6">
+              <CardTitle className="text-lg ">{achievement.title}</CardTitle>
+              <p className="mt-2 text-muted-foreground">{achievement.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </Section>
   );
 }
-<div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
-                  Click to view certificate
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 lucide lucide-arrow-right"><path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg>
-                </div> 
-// 'use client';
-
-// import { useState } from 'react';
-// import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-// import { Section } from './section';
-
-// const achievements = [
-//   {
-//     title: 'Machine Learning Project',
-//     image: '/certificates/machine-learning.png',
-//   },
-//   {
-//     title: 'Machine Learning Certificate From Infosys Spring-Board',
-//     image: '/certificates/infosys.png',
-//   },
-//   {
-//     title: 'PhpMySql Certificate',
-//     image: '/certificates/php.jpg',
-//   },
-//   {
-//     title: 'DSA Mastery Program With C++ Language',
-//     image: '/certificates/dsaScaller.png',
-//   },
-//    {
-//     title: 'Coding Ninjas Certificate',
-//     image:'/certificates/code.png'
-//   },
-//   {
-//     title: 'College Tech Probe for Web Development Certificate',
-//     image: '/certificates/tech-probe.jpg',
-//   },
-//   {
-//     title: 'Basic Understanding in C Language certificate',
-//     image: '/certificates/c.png',
-//   },
-//   {
-//     title: 'Review Paper Publication Certificate',
-//     image:'/certificates/revid.jpg',
-//   },
-//    {
-//     title: 'Blood Donation Certificate',
-//     image:'/certificates/blood_donation.jpg',
-//   },
-//    {
-//     title: 'Blood Donation Certificate By Re Life Blood Center',
-//     image:'/certificates/blood.jpg',
-//   },
-//   {
-//     title: 'Logical Reasoning Certificate By CareerRide',
-//     image:'/certificates/Logical.png',
-//   },
-//   ,
-//   {
-//     title: 'Say No Drugs Certificate From Narcotics Control Bureau',
-//     image:'/certificates/NBC.png',
-//   },
-//   {
-//     title: 'Say No Tobaco Certificate From Government',
-//     image:'/certificates/No-tobaco.png',
-//   }
-// ];
-
-// export function ResumeToolSection() {
-//   const [activeIndex, setActiveIndex] = useState(null);
-
-//   return (
-//     <Section id="resume-tool" className="py-16 bg-secondary/20 fade-in-up">
-//       <div className="mb-12 text-center">
-//         <h2 className="mb-4 text-3xl font-bold md:text-4xl font-headline">
-//           Achievements & Certificates
-//         </h2>
-//         <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-//           A passionate self-learner dedicated to turning ideas into real projects through consistent learning and hands-on practice.
-//         </p>
-//       </div>
-
-//       <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3">
-//         {achievements.map((achievement, index) => (
-//           <Card
-//             key={index}
-//             onClick={() => setActiveIndex(index === activeIndex ? null : index)}
-//             className="cursor-pointer transition-transform hover:scale-[1.02] shadow-md"
-//           >
-//             <CardHeader>
-//               <CardTitle className="text-xl text-center">{achievement.title}</CardTitle>
-//             </CardHeader>
-//             <CardContent>
-//               {activeIndex === index ? (
-//                 <img
-//                   src={achievement.image}
-//                   alt={achievement.title}
-//                   className="w-full transition-all duration-300 rounded-lg shadow-lg"
-//                 />
-//               ) : (
-//                 <p className="text-center text-muted-foreground">
-//                   Click to view certificate
-//                 </p>
-//               )}
-//             </CardContent>
-//           </Card>
-//         ))}
-//       </div>
-//     </Section>
-//   );
-// }
-
-
-// 'use client';
-
-// import { useForm } from 'react-hook-form';
-// import { zodResolver } from '@hookform/resolvers/zod';
-// import * as z from 'zod';
-// import { useState, useTransition } from 'react';
-
-// import { Button } from '@/components/ui/button';
-// import {
-//   Form,
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from '@/components/ui/form';
-// import { Textarea } from '@/components/ui/textarea';
-// import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-// import { Section } from './section';
-// import { adaptResumeAction } from '@/app/actions';
-// import { Wand2, Loader2 } from 'lucide-react';
-// import { useToast } from '@/hooks/use-toast';
-
-// const resumeToolSchema = z.object({
-//   jobDescription: z.string().min(50, 'Please provide a more detailed job description.'),
-//   resumeBulletPoints: z.string().min(20, 'Please enter at least one bullet point.'),
-//   criteria: z.string().min(10, 'Please provide some criteria for adaptation.'),
-// });
-
-
-// export function ResumeToolSection() {
-//   const [isPending, startTransition] = useTransition();
-//   const [adaptedPoints, setAdaptedPoints] = useState('');
-//   const { toast } = useToast();
-
-//   const form = useForm({
-//     resolver: zodResolver(resumeToolSchema),
-//     defaultValues: {
-//       jobDescription: '',
-//       resumeBulletPoints: '',
-//       criteria: 'Make it more action-oriented and use keywords from the job description.',
-//     },
-//   });
-
-//   const onSubmit = (values) => {
-//     startTransition(async () => {
-//       const result = await adaptResumeAction(values);
-//       if (result.error) {
-//         toast({
-//           title: 'Error',
-//           description: result.error,
-//           variant: 'destructive',
-//         });
-//         setAdaptedPoints('');
-//       } else if (result.data) {
-//         setAdaptedPoints(result.data.adaptedBulletPoints);
-//         toast({
-//           title: 'Success!',
-//           description: 'Your resume points have been adapted.',
-//         });
-//       }
-//     });
-//   };
-
-//   return (
-//     <Section id="resume-tool" className="bg-secondary/20 fade-in-up">
-//       <div className="text-center">
-//         <h2 className="mb-4 text-3xl font-bold md:text-4xl font-headline">Acheivements</h2>
-//         <p className="max-w-2xl mx-auto mb-12 text-lg text-muted-foreground">
-//           A passionate self-learner dedicated to turning ideas into real projects through consistent learning and hands-on practice.
-//         </p>
-//       </div>
-
-//       <div className="grid items-start grid-cols-1 gap-8 lg:grid-cols-2">
-//         {/* <Card>
-//           <CardHeader>
-//             <CardTitle>Input Your Details</CardTitle>
-//           </CardHeader>
-//           <CardContent>
-//             <Form {...form}>
-//               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-//                 <FormField
-//                   control={form.control}
-//                   name="jobDescription"
-//                   render={({ field }) => (
-//                     <FormItem>
-//                       <FormLabel>Job Description</FormLabel>
-//                       <FormControl>
-//                         <Textarea
-//                           placeholder="Paste the job description here..."
-//                           rows={8}
-//                           {...field}
-//                         />
-//                       </FormControl>
-//                       <FormMessage />
-//                     </FormItem>
-//                   )}
-//                 />
-//                 <FormField
-//                   control={form.control}
-//                   name="resumeBulletPoints"
-//                   render={({ field }) => (
-//                     <FormItem>
-//                       <FormLabel>Your Resume Bullet Points</FormLabel>
-//                       <FormControl>
-//                         <Textarea
-//                           placeholder="- Led a team of 5 developers in the successful launch of a new product."
-//                           rows={6}
-//                           {...field}
-//                         />
-//                       </FormControl>
-//                       <FormMessage />
-//                     </FormItem>
-//                   )}
-//                 />
-//                 <FormField
-//                   control={form.control}
-//                   name="criteria"
-//                   render={({ field }) => (
-//                     <FormItem>
-//                       <FormLabel>Adaptation Criteria</FormLabel>
-//                       <FormControl>
-//                         <Textarea
-//                           placeholder="e.g., Emphasize leadership skills"
-//                           rows={3}
-//                           {...field}
-//                         />
-//                       </FormControl>
-//                       <FormMessage />
-//                     </FormItem>
-//                   )}
-//                 />
-//                 <Button type="submit" disabled={isPending} className="w-full transition-shadow animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50">
-//                   {isPending ? (
-//                     <>
-//                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-//                       Adapting...
-//                     </>
-//                   ) : (
-//                     <>
-//                       <Wand2 className="w-4 h-4 mr-2" />
-//                       Adapt with AI
-//                     </>
-//                   )}
-//                 </Button>
-//               </form>
-//             </Form>
-//           </CardContent>
-//         </Card>
-        
-//         <Card className="lg:sticky top-24">
-//           <CardHeader>
-//             <CardTitle>AI-Adapted Bullet Points</CardTitle>
-//           </CardHeader>
-//           <CardContent>
-//             <Textarea
-//               readOnly
-//               value={adaptedPoints}
-//               placeholder="Your AI-generated resume points will appear here..."
-//               rows={isPending ? 20 : Math.max(10, adaptedPoints.split('\n').length + 2)}
-//               className="transition-all duration-300 bg-muted/50"
-//             />
-//           </CardContent>
-//         </Card> */}
-//       </div>
-//     </Section>
-//   );
-// }
-{/* <div class="flex justify-center items-center gap-4 fade-in-up" style="animation-delay: 0.4s;"></div> */}

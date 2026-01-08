@@ -1,26 +1,20 @@
 // src/lib/mongodb.js
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+const uri = process.env.MONGODB_URI;
 
 if (!uri) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Please define the MONGODB_URI environment variable inside Vercel Dashboard');
+  }
 }
 
 const options = {
-  // No SSL needed for local MongoDB
-  ssl: false,
-  
-  // Connection Configuration
-  serverSelectionTimeoutMS: 5000, // 5 seconds
-  connectTimeoutMS: 10000, // 10 seconds
-  socketTimeoutMS: 45000, // 45 seconds
-  
-  // Connection pool settings
-  maxPoolSize: 10,
-  minPoolSize: 5,
-  
-  // Retry configuration
+  // MongoDB Atlas requires specific settings for serverless
+  serverSelectionTimeoutMS: 10000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: process.env.NODE_ENV === 'production' ? 1 : 10,
+  minPoolSize: process.env.NODE_ENV === 'production' ? 0 : 5,
   retryWrites: true,
   retryReads: true,
 };
@@ -28,23 +22,31 @@ const options = {
 let client;
 let clientPromise;
 
-if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable to preserve the connection
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect().then(client => {
-      console.log('✅ Connected to local MongoDB');
-      return client;
-    }).catch(err => {
-      console.error('❌ MongoDB connection error:', err);
-      throw err;
-    });
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  // In production mode, create a new client for each connection
-  client = new MongoClient(uri, options);
+if (!uri) {
+  // Fallback for local development if .env is missing
+  console.warn('⚠️ MONGODB_URI is not defined. Falling back to local MongoDB.');
+  const localUri = 'mongodb://localhost:27017/portfolio';
+  client = new MongoClient(localUri, options);
   clientPromise = client.connect();
+} else {
+  if (process.env.NODE_ENV === 'development') {
+    // In development mode, use a global variable to preserve the connection
+    if (!global._mongoClientPromise) {
+      client = new MongoClient(uri, options);
+      global._mongoClientPromise = client.connect().then(client => {
+        console.log('✅ Connected to MongoDB');
+        return client;
+      }).catch(err => {
+        console.error('❌ MongoDB connection error:', err);
+        throw err;
+      });
+    }
+    clientPromise = global._mongoClientPromise;
+  } else {
+    // In production mode (Vercel), create a new client
+    client = new MongoClient(uri, options);
+    clientPromise = client.connect();
+  }
 }
 
 export default clientPromise;

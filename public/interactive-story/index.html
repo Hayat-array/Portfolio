@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Story Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Interactive Story Generator</h1>
+            <p>Craft your own whimsical adventure instantly!</p>
+        </header>
+
+        <main class="glass-panel">
+            <div class="input-group">
+                <div class="input-field">
+                    <label for="customName">Protagonist Name</label>
+                    <input type="text" id="customName" placeholder="e.g. Alice" autocomplete="off">
+                </div>
+                <div class="input-field">
+                    <label for="customPlace">A Mystical Place</label>
+                    <input type="text" id="customPlace" placeholder="e.g. The Crystal Cave" autocomplete="off">
+                </div>
+                <div class="input-field">
+                    <label for="customObject">A Magical Object</label>
+                    <input type="text" id="customObject" placeholder="e.g. Glowing Sword" autocomplete="off">
+                </div>
+                <div class="input-field">
+                    <label for="customAction">An Epic Action</label>
+                    <input type="text" id="customAction" placeholder="e.g. defeated the dragon" autocomplete="off">
+                </div>
+            </div>
+
+            <button id="randomizeBtn" class="glow-on-hover">Generate Story 🎲</button>
+
+            <div class="story-output hidden" id="storyContainer">
+                <h2>Your Tale</h2>
+                <p id="storyText"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Designed for the Portfolio • <a href="/" class="back-link">Back to Portfolio</a></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

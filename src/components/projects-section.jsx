@@ -9,33 +9,11 @@ import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { Section } from './section';
 import { cn } from '@/lib/utils';
+import { ProjectImageCarousel } from './ProjectImageCarousel';
 
-const categories = ['All', 'Web App', 'Website', 'Mobile', 'Terminal App'];
+const categories = ['All', 'Web App', 'Website', 'Mobile', 'Terminal App', 'AI / Python'];
 
-const projects = [
-  {
-    title: "Banking Management System",
-    description:
-      "A C++ based terminal banking system with features like account creation, login, PIN change, deposits, withdrawals, admin login, and password recovery.",
-    image: "/projects/banking-system.png", // Make sure this exists in public/projects/
-    tags: ["C++", "OOP", "File Handling", "Turbo C++"],
-    category: "Terminal App",
-    link: "https://github.com/yourusername/banking-system", // Replace with actual link
-    aiHint: "C++ terminal banking project"
-  },
-  {
-    title: "Machine Learning Project",
-    description: "A machine learning model that predicts outcomes using Python and Scikit-learn, with OpenCv.",
-    image: "/projects/ml-project.png",
-    tags: ["Python", "ML", "Scikit-learn", "OpenCv","Pandas"],
-    category: "Web App",
-    link: "https://github.com/yourusername/ml-project",
-    aiHint: "Machine learning with frontend integration"
-  },
-  // Add more projects here...
-];
-
-export function ProjectsSection() {
+export function ProjectsSection({ projects = [] }) {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filteredProjects =
@@ -66,40 +44,44 @@ export function ProjectsSection() {
       </div>
 
       <div className="grid grid-cols-1 ml-5 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-        {filteredProjects.map((project, index) => (
-          <Card
-            key={project.title}
-            className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2"
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <CardHeader className="p-0">
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
-                data-ai-hint={project.aiHint}
-              />
-            </CardHeader>
-            <CardContent className="p-6">
-              <CardTitle className="mb-2">{project.title}</CardTitle>
-              <p className="text-muted-foreground mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <Button asChild variant="outline" className="w-full">
-                <Link href={project.link} target="_blank">
-                  View Project <ExternalLink className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
+        {filteredProjects.length > 0 ? (
+          filteredProjects.map((project, index) => (
+            <Card
+              key={project.title}
+              className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <CardHeader className="p-0">
+                <ProjectImageCarousel
+                  images={project.images}
+                  image={project.image}
+                  title={project.title}
+                  aiHint={project.aiHint}
+                />
+              </CardHeader>
+              <CardContent className="p-6">
+                <CardTitle className="mb-2">{project.title}</CardTitle>
+                <p className="text-muted-foreground mb-4 line-clamp-3">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags?.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href={project.link || "#"} target="_blank">
+                    View Project <ExternalLink className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="col-span-full text-center py-12 text-muted-foreground">
+            No projects found in this category.
+          </div>
+        )}
       </div>
     </Section>
   );

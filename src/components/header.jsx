@@ -14,6 +14,7 @@ const navLinks = [
   { href: '#projects', label: 'Projects' },
   { href: '#resume-tool', label: 'Achievements & Certificates' },
   { href: '#about', label: 'About Me' },
+  { href: '/resume/Hayat_Ali_Resume.pdf', label: 'Resume' },
   { href: '#contact', label: 'Contact' },
 ];
 
@@ -54,7 +55,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="#home" className="flex items-center gap-2 text-lg font-bold">
             {/* <CodeXml className="w-6 h-6 text-primary" /> */}
-            <img className="w-8 text-primary" src="/favico.png"  alt="" />
+            <img className="w-8 text-primary" src="/favico.png" alt="" />
             <span>Personal Portfolio</span>
           </Link>
 

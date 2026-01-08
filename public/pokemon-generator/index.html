@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Card Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- html2canvas for downloading images -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Pokémon Card Generator</h1>
+            <button id="generateBtn">Summon Random Pokémon</button>
+        </header>
+
+        <div id="cardArea" class="card-area">
+            <div id="pokemonCard" class="card">
+                <div class="card-header">
+                    <span class="name" id="pokeName">Loading...</span>
+                    <div class="hp">
+                        <span>HP</span>
+                        <span id="pokeHP">??</span>
+                    </div>
+                </div>
+
+                <div class="card-image-container">
+                    <img id="pokeImg" src="" alt="Pokemon">
+                </div>
+
+                <div class="card-info">
+                    <div class="types" id="pokeTypes">
+                        <!-- Types injected here -->
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="label">ATK</span>
+                            <span class="value" id="pokeAtk">??</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">DEF</span>
+                            <span class="value" id="pokeDef">??</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">SPD</span>
+                            <span class="value" id="pokeSpd">??</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="downloadBtn" class="download-btn">Download Card as Image 📥</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,35 +1,36 @@
 // First, install react-icons: npm install react-icons
 
-import { 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaJs, 
-  FaReact, 
-  FaBootstrap, 
-  FaPhp, 
-  FaNodeJs, 
-  FaGitAlt, 
-  FaGithub, 
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaBootstrap,
+  FaPhp,
+  FaNodeJs,
+  FaGitAlt,
+  FaGithub,
   FaPython,
-  FaFigma,
   FaCode,
   FaDatabase,
-  FaServer
+  FaServer,
+  FaRobot
 } from 'react-icons/fa';
 
-import { 
-  SiNextdotjs, 
-  SiTailwindcss, 
-  SiExpress, 
-  SiMongodb, 
-  SiMysql, 
-  SiCplusplus, 
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiExpress,
+  SiMongodb,
+  SiMysql,
+  SiCplusplus,
   SiPycharm,
   SiAuth0
 } from 'react-icons/si';
 
 import { Card, CardContent, CardHeader } from './ui/card';
 import { Section } from './section';
+import Image from 'next/image';
 
 const iconMap = {
   html: <FaHtml5 className="h-10 w-10 text-orange-500" />,
@@ -55,8 +56,7 @@ const iconMap = {
   'machine learning': <FaPython className="h-10 w-10 text-python " />,
   'python': <FaPython className="h-10 w-10 text-python " />,
   'auth.js': <SiAuth0 className="h-10 w-10 color: rgb(255 255 255);" />,
-  figma: <FaFigma className="h-10 w-10 text-pink-500" />,
-  
+  'antigravity': <Image src="/antigravity_logo.png" alt="Antigravity Logo" width={40} height={40} className="rounded-md" />,
 };
 
 const skillsList = [
@@ -82,7 +82,7 @@ const skillsList = [
   { name: 'Machine Learning', icon: 'machine learning' },
   { name: 'python', icon: 'python' },
   { name: 'Auth.js', icon: 'auth.js' },
-  { name: 'Figma', icon: 'figma' },
+  { name: 'Antigravity', icon: 'antigravity' },
 ];
 
 export function SkillsSection() {
