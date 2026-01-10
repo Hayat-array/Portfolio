@@ -20,15 +20,15 @@ const featuredProjects = [
     link: "https://github.com/Hayat-array/Al_Mukammal_Part2",
     aiHint: "Full-stack e-commerce platform with admin dashboard, JWT auth, and dynamic location logic"
   },
-  {
-    title: "Machine Learning -  ML Intelligence Predictor ",
-    description: " A data-driven engine powered by Python & Scikit-learn. This model processes non-linear data sets to deliver predictive insights with high-precision accuracy. ",
-    image: "/projects/ml-project.png",
-    tags: ["Python", "Scikit-learn", "Pandas", "Numpy", "OpenCV", "Seaborn", "MatPlot"],
-    category: "Machine Learning",
-    link: "https://github.com/Hayat-array/Machine_Learning",
-    aiHint: "This model processes non-linear data sets to deliver predictive insights with high-precision accuracy."
-  },
+ {
+  title: "Machine Learning Intelligence Predictor",
+  description: "A high-performance predictive engine built with Python and Scikit-learn, designed to analyze complex non-linear datasets and generate accurate, data-driven insights.",
+  image: "/projects/ml-project.png",
+  tags: ["Python", "Scikit-learn", "Pandas", "NumPy", "OpenCV", "Seaborn", "Matplotlib"],
+  category: "Machine Learning",
+  link: "https://github.com/Hayat-array/Machine_Learning",
+  aiHint: "Analyzes complex non-linear datasets to deliver accurate predictive insights."
+ },
   {
     title: "Hayat Task App",
     description: "A modern, responsive Task Management Application built with React and Vite. Designed to streamline organizational workflow, it provides distinct, secure interfaces for Administrators and Employees to manage, track, and execute tasks efficiently.",

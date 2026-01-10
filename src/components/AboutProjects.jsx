@@ -565,7 +565,7 @@ export function AboutProjects() {
 
                             <div className="relative h-full rounded-3xl overflow-hidden border-2 border-white/10 transition-all duration-700 group-hover:scale-[1.05] group-hover:rotate-y-12 group-hover:rotate-x-2 group-hover:border-emerald-500/60 shadow-[0_0_80px_-20px_rgba(16,185,129,0.4)] aspect-[16/10] lg:aspect-auto">
                                 <Image
-                                    src="/projects/gesture-control.png"
+                                    src="/projects/gesture_game_thumb.png"
                                     alt="Gesture Control Interface"
                                     fill
                                     className="object-cover contrast-[1.15] brightness-[1.1] saturate-[1.1]"
