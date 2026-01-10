@@ -101,6 +101,11 @@ A flagship enterprise-level platform for electronics retail.
 - **Key Features**: Admin Dashboard, Custom Color Management, Global Location Logic (200+ countries).
 - **Tech**: Next.js 14, MongoDB Aggregate Pipelines, JWT Auth.
 
+### ML Intelligence Predictor
+A data-driven engine powered by Python & Scikit-learn with predictive accuracy.
+- **Key Features**: Non-linear data processing, OpenCV integration, Predictive Modeling.
+- **Tech**: Python, Scikit-learn, Pandas, OpenCV.
+
 ### FoodRush Delivery
 Advanced multi-role food delivery ecosystem.
 - **Key Features**: Real-time tracking, Kitchen Display System (KDS), Stripe integration.

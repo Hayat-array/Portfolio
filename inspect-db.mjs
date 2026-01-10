@@ -1,5 +1,9 @@
 // Database inspection script
+import dotenv from 'dotenv';
 import clientPromise from './src/lib/mongodb.js';
+
+// Load environment variables
+dotenv.config({ path: '.env.local' });
 
 async function inspectDatabase() {
     try {

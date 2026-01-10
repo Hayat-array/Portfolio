@@ -1,6 +1,7 @@
 // Quick database update script
 const { MongoClient } = require('mongodb');
-require('dotenv').config({ path: '.env.local' });
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.local' });
 
 const projectToUpdate = {
     title: "Al Mukammal - E-Commerce Platform",
