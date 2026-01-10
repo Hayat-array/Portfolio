@@ -55,25 +55,37 @@ export function Header() {
       )}
     >
       <div className="container px-4 mx-auto">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="#home"
-            className="flex items-center gap-2 text-lg font-bold text-foreground hover:text-primary transition-colors"
-          >
-            <img className="w-8 h-8" src="/favico.png" alt="Portfolio Logo" />
-            <span className="hidden sm:inline">Personal Portfolio</span>
-          </Link>
+        {/* Three-column grid layout for perfect center alignment */}
+        <div className="grid grid-cols-3 items-center h-16 gap-4">
+          {/* Left Column: Logo */}
+          <div className="flex items-center justify-start">
+            <Link
+              href="#home"
+              className="flex items-center gap-2 text-lg font-bold text-foreground hover:text-primary transition-colors"
+            >
+              <img className="w-8 h-8 flex-shrink-0" src="/favico.png" alt="Portfolio Logo" />
+              <span className="hidden sm:inline whitespace-nowrap">Personal Portfolio</span>
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <nav className="items-center hidden space-x-1 md:flex">
-            {navLinks.map((link) => (
-              <NavLink key={link.href} {...link} />
-            ))}
+          {/* Center Column: Desktop Navigation (truly centered) */}
+          <nav className="hidden md:flex items-center justify-center">
+            <div className="flex items-center space-x-1">
+              {navLinks.slice(0, 4).map((link) => (
+                <NavLink key={link.href} {...link} />
+              ))}
+            </div>
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2">
+          {/* Center Column: Mobile Brand Name (truly centered) */}
+          <div className="flex md:hidden items-center justify-center">
+            <span className="text-sm font-semibold text-foreground/80 truncate">
+              Portfolio
+            </span>
+          </div>
+
+          {/* Right Column: Actions */}
+          <div className="flex items-center justify-end gap-2">
             <ThemeToggle />
 
             {/* Mobile Menu Button */}
