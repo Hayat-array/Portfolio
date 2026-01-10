@@ -37,7 +37,8 @@ if (!uri) {
         console.log('✅ Connected to MongoDB');
         return client;
       }).catch(err => {
-        console.error('❌ MongoDB connection error:', err);
+        // Suppress loud error in dev, page.jsx handles the fallback
+        console.warn('⚠️ MongoDB connection issue (switching to static data):', err.message);
         throw err;
       });
     }

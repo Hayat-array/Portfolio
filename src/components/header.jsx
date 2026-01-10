@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Menu, CodeXml } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
@@ -48,7 +48,7 @@ export function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
           ? 'bg-background/80 backdrop-blur-sm border-b border-border/50'
-          : 'bg-transparent'
+          : 'bg-background/80 backdrop-blur-sm md:bg-transparent'
       )}
     >
       <div className="container px-4 mx-auto">
@@ -71,10 +71,11 @@ export function Header() {
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon">
-                    <Menu />
+                    <Menu className="w-6 h-6 text-foreground" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[240px]">
+                  <SheetTitle className="hidden">Mobile Menu</SheetTitle>
                   <div className="flex flex-col pt-8 space-y-4">
                     {navLinks.map((link) => (
                       <NavLink key={link.href} {...link} isMobile />
