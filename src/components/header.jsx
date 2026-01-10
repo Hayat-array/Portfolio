@@ -71,7 +71,7 @@ export function Header() {
           {/* Center Column: Desktop Navigation (truly centered) */}
           <nav className="hidden md:flex items-center justify-center">
             <div className="flex items-center space-x-1">
-              {navLinks.slice(0, 4).map((link) => (
+              {navLinks.map((link) => (
                 <NavLink key={link.href} {...link} />
               ))}
             </div>
