@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import { Menu, CodeXml } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
 
@@ -35,7 +35,10 @@ export function Header() {
       <Button
         variant="ghost"
         onClick={() => isMobile && setMobileMenuOpen(false)}
-        className={cn('w-full justify-start text-foreground/80 hover:bg-accent hover:text-accent-foreground', !isMobile && 'w-auto')}
+        className={cn(
+          'text-foreground hover:bg-accent hover:text-accent-foreground transition-colors',
+          isMobile ? 'w-full justify-start min-h-[44px]' : 'w-auto'
+        )}
       >
         {label}
       </Button>
@@ -47,40 +50,59 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-background/80 backdrop-blur-sm border-b border-border/50'
-          : 'bg-background/80 backdrop-blur-sm md:bg-transparent'
+          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm'
+          : 'bg-background/90 backdrop-blur-sm md:bg-transparent'
       )}
     >
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between h-16">
-          <Link href="#home" className="flex items-center gap-2 text-lg font-bold">
-            {/* <CodeXml className="w-6 h-6 text-primary" /> */}
-            <img className="w-8 text-primary" src="/favico.png" alt="" />
-            <span>Personal Portfolio</span>
+          {/* Logo */}
+          <Link
+            href="#home"
+            className="flex items-center gap-2 text-lg font-bold text-foreground hover:text-primary transition-colors"
+          >
+            <img className="w-8 h-8" src="/favico.png" alt="Portfolio Logo" />
+            <span className="hidden sm:inline">Personal Portfolio</span>
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="items-center hidden space-x-1 md:flex">
             {navLinks.map((link) => (
               <NavLink key={link.href} {...link} />
             ))}
           </nav>
 
+          {/* Actions */}
           <div className="flex items-center gap-2">
             <ThemeToggle />
+
+            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="w-6 h-6 text-foreground" />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="min-w-[44px] min-h-[44px] text-foreground hover:bg-accent hover:text-accent-foreground"
+                    aria-label="Toggle mobile menu"
+                  >
+                    {mobileMenuOpen ? (
+                      <X className="w-6 h-6" />
+                    ) : (
+                      <Menu className="w-6 h-6" />
+                    )}
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[240px]">
-                  <SheetTitle className="hidden">Mobile Menu</SheetTitle>
-                  <div className="flex flex-col pt-8 space-y-4">
+                <SheetContent
+                  side="right"
+                  className="w-[280px] sm:w-[320px] bg-background border-border"
+                >
+                  <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
+                  <nav className="flex flex-col pt-8 space-y-2">
                     {navLinks.map((link) => (
                       <NavLink key={link.href} {...link} isMobile />
                     ))}
-                  </div>
+                  </nav>
                 </SheetContent>
               </Sheet>
             </div>
