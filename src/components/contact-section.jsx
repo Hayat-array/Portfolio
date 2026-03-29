@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useTransition } from 'react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +19,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from './ui/textarea';
 import { Section } from './section';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from '@/app/actions';
 import { Send, Loader2 } from 'lucide-react';
 
 const contactFormSchema = z.object({
@@ -43,17 +43,34 @@ export function ContactSection() {
 
   const onSubmit = (values) => {
     startTransition(async () => {
-      const result = await submitContactForm(values);
-      if (result.success) {
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
         });
-        form.reset();
-      } else {
+        const result = await response.json();
+
+        if (result?.success) {
+          toast({
+            title: "Message Sent!",
+            description: "Thank you for reaching out. I'll get back to you soon.",
+          });
+          form.reset();
+          return;
+        }
+
         toast({
           title: "Error",
-          description: result.error,
+          description: result?.error || 'Could not send message. Please try again.',
+          variant: "destructive",
+        });
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: 'Could not send message. Please try again.',
           variant: "destructive",
         });
       }
@@ -112,7 +129,7 @@ export function ContactSection() {
                 </FormItem>
               )}
             />
-            <Button type="submit" size="lg" disabled={isPending} className="w-full md:w-auto animated-gradient text-primary-foreground hover:shadow-lg hover:shadow-primary/50 transition-shadow">
+            <Button type="submit" size="lg" disabled={isPending} className="w-full md:w-auto animated-gradient text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-primary/50 transition-all duration-200 cursor-pointer">
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -123,6 +140,9 @@ export function ContactSection() {
                   Send Message <Send className="ml-2 h-4 w-4" />
                 </>
               )}
+            </Button>
+            <Button asChild type="button" variant="outline" size="lg" className="w-full md:w-auto">
+              <Link href="/chat">Open Private Chat</Link>
             </Button>
           </form>
         </Form>

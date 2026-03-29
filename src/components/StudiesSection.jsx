@@ -7,9 +7,27 @@ import { Section } from './section';
 
 const studies = [
   {
+    title: 'Agentblazer Champion - Salesforce',
+    description: 'Salesforce Agentblazer Champion certification awarded for expertise in AI agents and the Agentforce platform.',
+    image: '/certificates/agentforce.jpg',
+    pdf: '/certificates/Agentblazer_Certificate_Hayat.pdf',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure Certificate',
+    description: 'Oracle certification demonstrating proficiency in cloud infrastructure, AI foundations, and cloud services.',
+    image: '/certificates/oracle_v2.png',
+    pdf: '/certificates/oracle_certificate.pdf',
+  },
+  {
+    title: 'Data Science - BCG (Forage)',
+    description: 'Completed the BCG Data Science virtual experience program on Forage, covering data analysis, ML, and business insight generation.',
+    image: '/certificates/data_science_from_bcg.png',
+    pdf: '/certificates/data_science_from_bcg.pdf',
+  },
+  {
     title: 'B.Tech 2nd Year 4th Semester Result',
-    description: 'Academic performance and results for the fourth semester of the B.Tech program.',
-    image: '/certificates/infosys.png',
+    description: 'RTU Kota IV Semester Exam 2025 — Computer Science & Engg. SGPA: 8.40, CGPA: 9.03. Subjects include DBMS, TOC, Computer Networks, Microprocessor & more.',
+    image: '/certificates/rtu_4th_sem_result.png',
   },
   {
     title: 'B.Tech 2nd Year 3rd Semester Result',
@@ -77,13 +95,26 @@ export function StudiesSection() {
           >
             <CardHeader className="p-0">
               {activeIndex === index ? (
-                <Image
-                  src={study.image}
-                  alt={study.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover rounded-b"
-                />
+                <div>
+                  <Image
+                    src={study.image}
+                    alt={study.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover rounded-b"
+                  />
+                  {study.pdf && (
+                    <a
+                      href={study.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center justify-center gap-2 w-full py-2 text-sm font-semibold bg-primary/10 hover:bg-primary/20 text-primary border-t border-primary/20 transition-colors"
+                    >
+                      📄 View PDF Certificate
+                    </a>
+                  )}
+                </div>
               ) : (
                 <div className="flex h-48 text-center px-4 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 py-2 animated-gradient text-primary-foreground">
                   Click to view certificate

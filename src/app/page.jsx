@@ -1,4 +1,4 @@
-import { Header } from '@/components/header';
+import { HeaderClientOnly } from '@/components/header-client-only';
 import { HeroSection } from '@/components/hero-section';
 import { SkillsSection } from '@/components/skills-section';
 import { ProjectsSection } from '@/components/projects-section';
@@ -17,7 +17,7 @@ const featuredProjects = [
     image: "/projects/almukammal_dashboard_mockup.png",
     tags: ["Next.js 14", "MongoDB", "JWT Auth", "Admin Dashboard", "E-Commerce", "React Context"],
     category: "Web App",
-    link: "https://github.com/Hayat-array/Al_Mukammal_Part2",
+    link: "https://al-mukammal.onrender.com/",
     aiHint: "Full-stack e-commerce platform with admin dashboard, JWT auth, and dynamic location logic"
   },
   {
@@ -39,12 +39,39 @@ const featuredProjects = [
     aiHint: "Client-side task management app with RBAC and local storage persistence"
   },
   {
+    title: "JECRC Attendance App",
+    description: "A high-performance College Attendance Management System built with Next.js 16 and MongoDB. Features OTP-based teacher signup, bulk CSV student upload, a bubble-UI attendance interface, and advanced analytics with low-attendance alerts and multi-format export.",
+    image: "/projects/attendance_app_mockup.png",
+    tags: ["Next.js 16", "MongoDB", "NextAuth.js", "Mongoose", "Nodemailer", "CSS3"],
+    category: "Web App",
+    link: "https://attendance-alpha-opal.vercel.app/",
+    aiHint: "College attendance management portal with OTP auth and analytics"
+  },
+  {
+    title: "QR Studio",
+    description: "A high-efficiency, professional QR Code generator built with Flask and Pillow. Supports custom branding, center-logo embedding, color customization, and optimized scanning parameters for premium output.",
+    image: "/projects/qr_studio_mockup.png",
+    tags: ["Python", "Flask", "Pillow", "QR Code", "REST API"],
+    category: "Web App",
+    link: "https://qr-studio-hayat.vercel.app/",
+    aiHint: "Professional QR code generator with custom branding and logo embedding"
+  },
+  {
+    title: "NeuroGuard AI",
+    description: "A clinical AI platform that detects epileptic seizures from EEG signals in real time using a 3-layer hybrid deep learning ensemble (CNN-BiLSTM-Attention + RF + XGBoost). Features 3D brain visualization, WebSocket live streaming, and a full patient management system. Achieved ~98.3% accuracy and ~0.9949 ROC-AUC.",
+    image: "/projects/neuroguard_mockup.png",
+    tags: ["Python", "TensorFlow", "Flask", "Three.js", "WebSocket", "XGBoost", "DRL"],
+    category: "AI",
+    link: "https://github.com/Hayat-array/NeuroGuardAI",
+    aiHint: "Real-time epileptic seizure detection with 3D brain visualization and hybrid deep learning"
+  },
+  {
     title: "Digital Portfolio Engine",
     description: "A masterclass in modern frontend architecture, featuring server-side rendering, zero-client-bundle data mutations, and an ultra-premium dark-mode aesthetic. Built with Next.js 14 and MongoDB Atlas.",
     image: "/projects/portfolio_engine_mockup.png",
     tags: ["Next.js 14", "MongoDB Atlas", "Framer Motion", "Tailwind CSS", "Server Actions"],
     category: "Web App",
-    link: "https://github.com/Hayat-array/Portfolio",
+    link: "https://codewithhsquare.vercel.app/",
     aiHint: "High-performance portfolio engine with real-time data sync and premium visual effects"
   },
   {
@@ -128,13 +155,22 @@ const featuredProjects = [
     link: "https://github.com/Hayat-array/gesture-game-controller",
     aiHint: "Gesture-based game control using computer vision and Python"
   },
+   {
+    title: "Bitlinks - Link Shortener",
+    description: "A high-performance link shortener featuring a sleek, modern UI, category-based browsing, and a smooth checkout flow. Optimized for speed and responsiveness.",
+    image: "/projects/bitlinks-dashboard.png",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "UI/UX"],
+    category: "Web App",
+    link: "https://bitlinks-ff21.vercel.app/",
+    aiHint: "Modern link shortener app with analytics"
+  },
   {
     title: "FoodRush - Delivery App",
     description: "A high-performance food delivery frontend featuring a sleek, modern UI, category-based browsing, and a smooth checkout flow. Optimized for speed and responsiveness.",
     image: "/projects/foodrush_thumb.png",
     tags: ["React", "Tailwind CSS", "Framer Motion", "UI/UX"],
     category: "Web App",
-    link: "https://github.com/Hayat-array/FoodRush",
+    link: "https://food-rush-nine.vercel.app/",
     aiHint: "Modern food delivery app frontend with smooth animations"
   },
   {
@@ -144,7 +180,7 @@ const featuredProjects = [
     images: ["/projects/neural-interface-1.jpg", "/projects/neural-interface-2.jpg"],
     tags: ["Python", "NLP", "Speech Recognition", "Automation"],
     category: "AI",
-    link: "https://github.com/Hayat-array/Ai_Assistant",
+    link: "http://Hayatai.vercel.app",
     aiHint: "Personal AI assistant with voice and chat capabilities"
   },
   {
@@ -162,43 +198,44 @@ const featuredProjects = [
 
 async function getProjects() {
   try {
-    // If we're in development and connection is unreliable, just return the static list
-    if (process.env.NODE_ENV === 'development') {
-      try {
-        const client = await clientPromise;
-        if (!client) throw new Error("No client");
-      } catch (e) {
-        console.warn('⚠️ Development mode: Using static project list (DB unavailable)');
-        return featuredProjects;
-      }
-    }
-
     const client = await clientPromise;
     const db = client.db('portfolio');
 
     // Check 'projects' collection first
-    let projects = await db.collection('projects').find({}).toArray();
+    let dbProjects = await db.collection('projects').find({}).toArray();
 
-    // Fallback to 'Hayat' collection if 'projects' is empty (based on user Atlas link)
-    if (projects.length === 0) {
+    // Fallback to 'Hayat' collection if 'projects' is empty
+    if (dbProjects.length === 0) {
       console.log('ℹ️ "projects" collection is empty, checking "Hayat" collection...');
-      projects = await db.collection('Hayat').find({}).toArray();
+      dbProjects = await db.collection('Hayat').find({}).toArray();
     }
 
-    // If database has projects, use them but ensuring we handle duplicates if necessary
-    // Ideally we should merge carefully, but for now duplicate fetching was the issue.
-    // Given the issues, we will prioritize the static list if DB list is empty OR if we encounter errors.
-
-    if (projects.length === 0) {
+    if (dbProjects.length === 0) {
       return featuredProjects;
     }
 
-    const fetchedProjects = JSON.parse(JSON.stringify(projects));
-    return fetchedProjects;
+    // Always start from the static list as the base so nothing is ever lost.
+    // Then override any matching project with DB data (DB can update descriptions, links, etc.)
+    const dbProjectsClean = JSON.parse(JSON.stringify(dbProjects));
+    const dbTitles = new Set(dbProjectsClean.map(p => p.title));
+
+    // Merge: static projects first (preserving order), then any DB-only projects appended
+    const merged = featuredProjects.map(staticProject => {
+      const dbMatch = dbProjectsClean.find(p => p.title === staticProject.title);
+      return dbMatch ? { ...staticProject, ...dbMatch } : staticProject;
+    });
+
+    // Append any DB projects that aren't in the static list
+    dbProjectsClean.forEach(dbProject => {
+      if (!merged.some(p => p.title === dbProject.title)) {
+        merged.push(dbProject);
+      }
+    });
+
+    return merged;
 
   } catch (e) {
     console.log('ℹ️ Using static project data (Database unavailable or building)');
-    // Return the full hardcoded list as a robust fallback
     return featuredProjects;
   }
 }
@@ -209,10 +246,9 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <Header />
+      <HeaderClientOnly />
       <main className="flex-1">
         <HeroSection />
-        {/* <AboutSection /> */}
         <SkillsSection />
         <ProjectsSection projects={projects} />
         <AboutProjects />

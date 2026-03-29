@@ -2,9 +2,7 @@
 
 export function AboutSection() {
   return (
-    <>
-
-      <div id="about" className="relative rounded-xl p-[2px] overflow-hidden group 
+    <>`<div id="about" className="relative rounded-xl p-[2px] overflow-hidden group 
                 before:absolute before:inset-0 before:rounded-xl 
                 before:bg-gradient-to-r before:from-indigo-500 
                 before:via-violet-500 before:to-indigo-500 
@@ -53,7 +51,7 @@ export function AboutSection() {
             </p>
           </div>
         </section>
-      </div>
+      </div>`
     </>
   );
 }

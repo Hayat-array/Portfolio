@@ -57,6 +57,11 @@ const achievements = [
     image: '/certificates/Machine-Learning.png',
   },
   {
+    title: 'Algorithmic Trading with Python, ML & AWS - Infosys Springboard',
+    description: 'Completed the Algorithmic Trading A-Z with Python, Machine Learning & AWS course on Infosys Springboard (June 2025).',
+    image: '/certificates/infosys.png',
+  },
+  {
     title: 'PHP & MySQL Development',
     description: 'Learned backend development using PHP and MySQL.',
     image: '/certificates/php.jpg',
@@ -67,8 +72,8 @@ const achievements = [
     image: '/certificates/dsaScaller.png',
   },
   {
-    title: 'Coding Ninjas Certificate',
-    description: 'Certified in various coding challenges and programming fundamentals through the Coding Ninjas platform.',
+    title: '10X Online Coding Contest - JECRC & Coding Ninjas',
+    description: 'Participated in the 10X Online Coding Contest conducted by 10X Club-JECRC Foundation in collaboration with Coding Ninjas.',
     image: '/certificates/code.png',
   },
   {
@@ -84,12 +89,22 @@ const achievements = [
   {
     title: 'Review Paper Publication',
     description: 'Awarded for publishing a research review paper in a recognized academic journal.',
-    image: '/certificates/revid.jpg',
+    image: '/certificates/ReviewPaper.png',
   },
   {
-    title: 'Blood Donation Certificate',
+    title: 'Blood Donation - Re Life Blood Center',
     description: 'Recognized for contributing to life-saving blood donation drives at Re Life Blood Center.',
     image: '/certificates/blood.jpg',
+  },
+  {
+    title: 'Blood Donation - Aashayein Mega Camp (JECRC)',
+    description: 'Certificate of Appreciation for donating blood at the Aashayein - The Life Saviours Mega Blood Donation Camp at JECRC, Nov 2024.',
+    image: '/certificates/blood_donation.jpg',
+  },
+  {
+    title: 'Logical Reasoning - CareerRide (Cursa)',
+    description: 'Completed the Logical Reasoning by CareerRide course on the Cursa platform (11 hrs 02 min + 5 exercises).',
+    image: '/certificates/Logical.png',
   },
   {
     title: 'National Narcotics Control Bureau Certificate',

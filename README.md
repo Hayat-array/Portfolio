@@ -12,6 +12,7 @@ A high-performance, cyber-aesthetic portfolio website built with **Next.js 14** 
 - **Interactive UI**: Powered by **Framer Motion** for complex animations and page transitions.
 - **Responsive Design**: Fully optimized layouts for mobile, tablet, and desktop devices.
 - **Project Showcase**: specialized "Behind the Code" sections for deep-diving into featured projects (e.g., Al Mukammal, FoodRush).
+- **Admin Security Suite**: Secure backend dashboard with **OTP-based Password Reset** and session management.
 - **Resume Tool**: Integrated interactive resume builder/viewer.
 
 ## 🛠️ Tech Stack
@@ -53,6 +54,25 @@ Follow these steps to set up the project locally.
    Create a `.env.local` file in the root directory and add your MongoDB connection string:
    ```env
    MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/portfolio
+   ```
+
+   To enable admin email notification for new contact messages, also add:
+   ```env
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER=your-smtp-username
+   SMTP_PASS=your-smtp-password-or-app-password
+   SMTP_FROM="Portfolio Contact <your-smtp-username>"
+   ADMIN_NOTIFY_EMAIL=admin@example.com
+   SITE_URL=https://your-domain.com
+   ```
+
+   To restrict inbox access to admin only, also add:
+   ```env
+   ADMIN_USERNAME=admin
+   ADMIN_PASSWORD=change-this-password
+   ADMIN_SESSION_TOKEN=replace-with-a-long-random-secret-token
    ```
 
 4. **Run Development Server**
@@ -125,6 +145,24 @@ High-performance task management suite with secure user silos.
 Client-side enterprise workflow system with role-based access.
 - **Key Features**: Admin/Employee Dashboards, RBAC, Auto-Credentials, Kanban Board.
 - **Tech**: React 18, Vite, Context API, Local Storage.
+
+### JECRC Attendance App
+Professional college attendance management portal with analytics.
+- **Key Features**: OTP Auth, Bulk CSV Upload, Bubble P/A UI, Low-Attendance Alerts, Multi-format Export.
+- **Tech**: Next.js 16, MongoDB/Mongoose, NextAuth.js, Nodemailer.
+- **Repo**: [github.com/Hayat-array/Attendance](https://github.com/Hayat-array/Attendance)
+
+### QR Studio
+Professional branded QR code generator with logo embedding.
+- **Key Features**: Center-Logo Embedding, Color Customization, Optimized Scan Parameters, REST API.
+- **Tech**: Python, Flask, Pillow, qrcode.
+- **Repo**: [github.com/Hayat-array/qr_studio](https://github.com/Hayat-array/qr_studio)
+
+### NeuroGuard AI
+Real-time epileptic seizure detection clinical AI platform — Arya Verse 2.0 Hackathon.
+- **Performance**: ~98.3% Accuracy, ~0.9949 ROC-AUC, ~93.5% Sensitivity.
+- **Key Features**: CNN-BiLSTM-Attention Ensemble, 3D Brain Visualization (Three.js), WebSocket EEG Streaming, DRL Adaptive Threshold, Patient Dossier.
+- **Tech**: Python, TensorFlow, Flask, Socket.IO, XGBoost, Three.js, Chart.js.
 
 ### Interactive Story Generator
 Whimsical random story creator.
