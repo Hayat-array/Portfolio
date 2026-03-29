@@ -25,6 +25,12 @@ const studies = [
     pdf: '/certificates/data_science_from_bcg.pdf',
   },
   {
+    title: 'Technology Job Simulation - Deloitte (Forage)',
+    description: 'Completed the Technology Strategy & Innovation job simulation, focusing on cloud transformation, technology infrastructure, and business optimization.',
+    image: '/certificates/deloitte_mockup.png',
+    pdf: '/certificates/Deloitte_Hayat.pdf',
+  },
+  {
     title: 'B.Tech 2nd Year 4th Semester Result',
     description: 'RTU Kota IV Semester Exam 2025 — Computer Science & Engg. SGPA: 8.40, CGPA: 9.03. Subjects include DBMS, TOC, Computer Networks, Microprocessor & more.',
     image: '/certificates/rtu_4th_sem_result.png',

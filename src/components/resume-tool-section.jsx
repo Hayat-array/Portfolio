@@ -7,6 +7,11 @@ import { Section } from './section';
 
 const achievements = [
   {
+    title: 'Technology Job Simulation - Deloitte (Forage)',
+    description: 'Completed the Technology Strategy & Innovation job simulation, focusing on cloud transformation, technology infrastructure, and business optimization.',
+    image: '/certificates/deloitte_mockup.png',
+  },
+  {
     title: 'Adobe India Hackathon - Round 1',
     description: 'Participated in Round 1 Online MCQ Assessment + Coding of Adobe India Hackathon organized by Adobe & Unstop.',
     image: '/certificates/adobe_hackathon.png',
