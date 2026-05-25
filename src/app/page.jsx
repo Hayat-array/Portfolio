@@ -1,4 +1,4 @@
-import { HeaderClientOnly } from '@/components/header-client-only';
+import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
 import { SkillsSection } from '@/components/skills-section';
 import { ProjectsSection } from '@/components/projects-section';
@@ -57,6 +57,15 @@ const featuredProjects = [
     aiHint: "Professional QR code generator with custom branding and logo embedding"
   },
   {
+    title: "PDF Summarizer",
+    description: "A smart document processing web app built with Flask, MongoDB, HTML, CSS, JavaScript, and Python libraries for PDF handling. It extracts and summarizes long PDF files into concise, readable insights with a clean, responsive interface.",
+    image: "/pdfsum.png",
+    tags: ["Flask", "MongoDB", "Python", "PDF Libraries", "HTML5", "CSS3", "JavaScript"],
+    category: "Web App",
+    link: "https://pdf-summarizer-ten-kappa.vercel.app/",
+    aiHint: "PDF summarization app with Flask backend, MongoDB storage, and document processing"
+  },
+  {
     title: "NeuroGuard AI",
     description: "A clinical AI platform that detects epileptic seizures from EEG signals in real time using a 3-layer hybrid deep learning ensemble (CNN-BiLSTM-Attention + RF + XGBoost). Features 3D brain visualization, WebSocket live streaming, and a full patient management system. Achieved ~98.3% accuracy and ~0.9949 ROC-AUC.",
     image: "/projects/neuroguard_mockup.png",
@@ -98,7 +107,7 @@ const featuredProjects = [
     image: "/projects/pokemon_generator_thumb.png",
     tags: ["Vanilla JS", "PokéAPI", "Async/Await", "html2canvas", "Dynamic Theming"],
     category: "Interactive",
-    link: "https://github.com/Hayat-array/Pokemon-Card-Generator",
+    link: "https://pokemon-card-generator-r7k8.vercel.app/",
     aiHint: "Real-time Pokemon card generator with API integration and image export"
   },
   {
@@ -198,7 +207,11 @@ const featuredProjects = [
 
 async function getProjects() {
   try {
-    const client = await clientPromise;
+    // Avoid blocking first render if DB is slow/unreachable in dev.
+    const client = await Promise.race([
+      clientPromise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('DB connection timeout')), 1500)),
+    ]);
     const db = client.db('portfolio');
 
     // Check 'projects' collection first
@@ -246,7 +259,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <HeaderClientOnly />
+      <Header />
       <main className="flex-1">
         <HeroSection />
         <SkillsSection />

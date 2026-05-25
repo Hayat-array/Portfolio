@@ -16,13 +16,19 @@ function parsePort(value, fallback) {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
-function isMailerConfigured() {
+function isSmtpConfigured() {
   return Boolean(
     process.env.SMTP_HOST &&
       process.env.SMTP_PORT &&
       process.env.SMTP_USER &&
-      process.env.SMTP_PASS &&
-      process.env.ADMIN_NOTIFY_EMAIL
+      process.env.SMTP_PASS
+  );
+}
+
+function isMailerConfigured() {
+  return Boolean(
+    isSmtpConfigured() &&
+      (process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL || process.env.CONTACT_EMAIL || process.env.SMTP_USER || 'Hayatali123786@gmail.com')
   );
 }
 
@@ -46,12 +52,17 @@ function getTransporter() {
 
 export async function sendAdminNewMessageNotification({ name, email, message, createdAt }) {
   if (!isMailerConfigured()) {
-    console.warn('Email notification skipped: SMTP or ADMIN_NOTIFY_EMAIL env vars are missing.');
+    console.warn('Email notification skipped: SMTP settings or an admin recipient email are missing.');
     return { success: false, skipped: true };
   }
 
   const transporter = getTransporter();
-  const targetEmail = process.env.ADMIN_NOTIFY_EMAIL;
+  const targetEmail =
+    process.env.ADMIN_NOTIFY_EMAIL ||
+    process.env.ADMIN_EMAIL ||
+    process.env.CONTACT_EMAIL ||
+    process.env.SMTP_USER ||
+    'Hayatali123786@gmail.com';
   const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER;
   const receivedAt = new Date(createdAt || new Date()).toLocaleString('en-US', {
     dateStyle: 'medium',
@@ -60,8 +71,7 @@ export async function sendAdminNewMessageNotification({ name, email, message, cr
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
   const safeMessage = escapeHtml(message);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || '';
-  const adminInboxUrl = baseUrl ? `${baseUrl.replace(/\/$/, '')}/admin/messages` : '/admin/messages';
+  const safeTargetEmail = escapeHtml(targetEmail);
 
   const subject = `📩 New portfolio message from ${name}`;
   const text = [
@@ -95,7 +105,7 @@ export async function sendAdminNewMessageNotification({ name, email, message, cr
       </table>
       <p style="margin: 0 0 8px;"><strong>Message:</strong></p>
       <div style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; white-space: pre-wrap;">${safeMessage}</div>
-      <p style="margin: 16px 0 0;">Open your admin inbox: <a href="${adminInboxUrl}">${adminInboxUrl}</a></p>
+      <p style="margin: 16px 0 0;">Delivered to: <a href="mailto:${safeTargetEmail}">${safeTargetEmail}</a></p>
     </div>
   `;
 
@@ -103,6 +113,55 @@ export async function sendAdminNewMessageNotification({ name, email, message, cr
     from: fromEmail,
     to: targetEmail,
     replyTo: email,
+    subject,
+    text,
+    html,
+  });
+
+  return { success: true };
+}
+
+export async function sendChatAuthOtp({ email, otp, expiresAt }) {
+  if (!isSmtpConfigured()) {
+    console.warn('Chat auth OTP email skipped: SMTP env vars are missing.');
+    return { success: false, skipped: true };
+  }
+
+  const transporter = getTransporter();
+  const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER;
+  const safeEmail = escapeHtml(email);
+  const safeOtp = escapeHtml(otp);
+  const expiresText = new Date(expiresAt || new Date()).toLocaleString('en-US', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
+  const subject = 'Your Private Chat Login Code';
+  const text = [
+    'Use this code to complete your private chat login/signup:',
+    '',
+    `OTP: ${otp}`,
+    `Expires: ${expiresText}`,
+    '',
+    'If you did not request this code, you can ignore this email.',
+  ].join('\n');
+
+  const html = `
+    <div style="font-family: Inter, Arial, sans-serif; line-height: 1.6; color: #111827;">
+      <h2 style="margin: 0 0 12px;">Private Chat Verification</h2>
+      <p style="margin: 0 0 12px;">Use the OTP below to continue your private chat authentication.</p>
+      <p style="margin: 0 0 12px;"><strong>Email:</strong> ${safeEmail}</p>
+      <div style="display: inline-block; padding: 10px 14px; border-radius: 8px; background: #111827; color: #ffffff; font-size: 22px; letter-spacing: 3px; font-weight: 700;">
+        ${safeOtp}
+      </div>
+      <p style="margin: 12px 0 0;">Expires at: ${expiresText}</p>
+      <p style="margin: 12px 0 0; color: #6b7280;">If you did not request this code, you can ignore this email.</p>
+    </div>
+  `;
+
+  await transporter.sendMail({
+    from: fromEmail,
+    to: email,
     subject,
     text,
     html,

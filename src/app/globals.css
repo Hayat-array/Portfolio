@@ -67,16 +67,6 @@
   }
 }
 
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(203 202 202);
-}
-
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255);
-}
-
 @layer base {
   * {
     border-color: hsl(var(--border));

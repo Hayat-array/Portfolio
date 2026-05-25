@@ -44,6 +44,17 @@ export async function setChatProfile({ name, email }) {
   }
 }
 
+export async function clearChatThreadCookie() {
+  const cookieStore = await cookies();
+  cookieStore.set(CHAT_THREAD_COOKIE_NAME, '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 0,
+  });
+}
+
 export async function getChatProfileFromCookies() {
   const cookieStore = await cookies();
   return {

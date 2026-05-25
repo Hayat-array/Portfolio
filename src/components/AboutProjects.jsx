@@ -517,6 +517,73 @@ export function AboutProjects() {
                         </div>
                     </div>
 
+                    {/* Project: PDF Summarizer */}
+                    <div className="flex flex-col lg:flex-row-reverse items-stretch gap-12 group perspective-1000">
+                        <div className="flex-1 space-y-8 flex flex-col justify-center">
+                            <div className="p-10 rounded-3xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl transition-all duration-700 group-hover:bg-white/[0.07] group-hover:border-cyan-500/40 h-full flex flex-col justify-center relative overflow-hidden group/text">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
+                                <span className="text-xs font-bold tracking-[0.3em] text-cyan-400/60 uppercase mb-2">Document Intelligence</span>
+                                <h3 className="text-4xl font-black text-white mb-6 tracking-tight group-hover:text-cyan-400 transition-colors duration-500">
+                                    PDF <span className="text-cyan-500/80">Summarizer</span>
+                                </h3>
+
+                                <div className="space-y-6">
+                                    <p className="text-lg leading-relaxed text-slate-300 font-light">
+                                        A smart <span className="text-white font-medium">PDF summarization platform</span> built with <span className="text-cyan-400 font-bold">Flask, MongoDB, and Python PDF libraries</span>. It turns long documents into concise, readable insights through a clean HTML, CSS, and JavaScript interface.
+                                    </p>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+                                        <div className="bg-cyan-500/5 border border-cyan-500/20 p-4 rounded-xl backdrop-blur-md">
+                                            <h4 className="text-cyan-400 font-bold text-sm mb-2 uppercase tracking-widest">Core Features</h4>
+                                            <ul className="text-xs text-slate-400 space-y-2">
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> PDF Text Extraction</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> Smart Summary Generation</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> MongoDB Storage</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> Responsive Interface</li>
+                                            </ul>
+                                        </div>
+                                        <div className="bg-cyan-500/5 border border-cyan-500/20 p-4 rounded-xl backdrop-blur-md">
+                                            <h4 className="text-cyan-400 font-bold text-sm mb-2 uppercase tracking-widest">Tech Stack</h4>
+                                            <ul className="text-xs text-slate-400 space-y-2">
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> Flask Backend</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> Python PDF Libraries</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> MongoDB / Persistence</li>
+                                                <li className="flex items-center gap-2"><span className="w-1 h-1 bg-cyan-500 rounded-full" /> HTML / CSS / JavaScript</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-lg leading-relaxed text-slate-400 font-light">
+                                        Designed for quick document review and easy scanning, with a polished UI that keeps the focus on the key ideas in every PDF.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex-1 relative order-1 lg:order-2">
+                            <div className="absolute -inset-10 bg-cyan-500/30 rounded-[60px] blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 -z-10 animate-pulse" />
+                            <div className="relative h-full rounded-3xl overflow-hidden border-2 border-white/20 transition-all duration-700 group-hover:scale-[1.08] group-hover:rotate-y-12 group-hover:rotate-x-4 group-hover:border-cyan-500/60 shadow-[0_0_100px_-20px_rgba(34,211,238,0.5)] aspect-[16/10] lg:aspect-auto">
+                                <Image
+                                    src="/pdfsum.png"
+                                    alt="PDF Summarizer Interface"
+                                    fill
+                                    className="object-cover contrast-[1.2] brightness-[1.1] saturate-[1.2]"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent h-1/2 w-full -top-1/2 group-hover:animate-scan z-10" />
+                                <div className="absolute inset-x-0 top-0 h-[300%] w-[200%] bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-[200%] -translate-y-[50%] group-hover:translate-x-[200%] transition-transform duration-2000 ease-in-out z-20" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-95" />
+
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className="text-center opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-500">
+                                        <div className="bg-cyan-600/90 text-white text-[10px] font-black tracking-[0.5em] px-10 py-5 rounded-full backdrop-blur-2xl border border-white/30 shadow-[0_0_50px_rgba(34,211,238,0.5)] uppercase">
+                                            Flask / MongoDB
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Project: Hayat Task App */}
                     <div className="flex flex-col lg:flex-row items-stretch gap-12 group perspective-1000">
                         <div className="flex-1 space-y-8 order-2 lg:order-1 flex flex-col justify-center">

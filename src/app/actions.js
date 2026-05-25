@@ -2,16 +2,19 @@
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { adaptResume } from '@/ai/flows/adapt-resume';
 import clientPromise from '@/lib/mongodb';
 import { sendAdminNewMessageNotification } from '@/lib/mailer';
 import { isAdminAuthenticated } from '@/lib/admin-auth';
 import {
   getChatProfileFromCookies,
-  getChatThreadId,
   getOrCreateChatThreadId,
+  clearChatThreadCookie,
   setChatProfile,
 } from '@/lib/chat-auth';
+import { getChatAuthenticatedUser } from '@/lib/chat-user-auth';
+import { clearChatAuthenticatedSession, normalizeChatEmail } from '@/lib/chat-user-auth';
 
 export async function adaptResumeAction(input) {
   try {
@@ -52,6 +55,24 @@ async function insertChatMessage(db, payload) {
     isReadByUser: payload.sender === 'user',
     sourceContactId: payload.sourceContactId || null,
   });
+}
+
+async function deleteChatConversation(db, threadId) {
+  if (!threadId) {
+    return;
+  }
+
+  await db.collection('chat_messages').deleteMany({ threadId });
+  await db.collection('contacts').deleteMany({ threadId });
+  await db.collection('chat_users').updateMany(
+    { threadId },
+    {
+      $set: {
+        threadId: null,
+        updatedAt: new Date(),
+      },
+    }
+  );
 }
 
 async function backfillLegacyContactsToChat(db) {
@@ -209,26 +230,39 @@ export async function sendUserChatMessage(formData) {
   });
 
   if (!parsed.success) {
-    const errorMessages = parsed.error.issues.map((issue) => issue.message).join(', ');
-    return { success: false, error: `Invalid input: ${errorMessages}` };
+    redirect('/chat?status=error&message=Invalid%20message%20input.');
+  }
+
+  const authenticatedUser = await getChatAuthenticatedUser();
+  const authenticatedEmail = authenticatedUser?.email?.trim().toLowerCase() || '';
+  const normalizedPostedEmail = normalizeChatEmail(parsed.data.email);
+
+  if (!authenticatedUser || !authenticatedEmail) {
+    redirect('/chat/auth?error=Please%20login%20or%20signup%20to%20access%20private%20chat.');
+  }
+
+  if (normalizedPostedEmail !== authenticatedEmail) {
+    redirect('/chat?status=error&message=Use%20your%20authenticated%20email%20for%20private%20chat.');
   }
 
   if (!(await isAdminAuthenticated())) {
     try {
       const client = await clientPromise;
       const db = client.db('portfolio');
-      const threadId = await getOrCreateChatThreadId();
+      const threadId = authenticatedUser.threadId;
       const createdAt = new Date();
       await setChatProfile({
         name: parsed.data.name,
-        email: parsed.data.email,
+        email: authenticatedEmail,
       });
 
-      await attachLegacyContactsByEmailToThread(db, threadId, parsed.data.email);
+      await attachLegacyContactsByEmailToThread(db, threadId, authenticatedEmail);
 
       await insertChatMessage(db, {
         threadId,
-        ...parsed.data,
+        name: parsed.data.name,
+        email: authenticatedEmail,
+        message: parsed.data.message,
         sender: 'user',
         createdAt,
       });
@@ -244,30 +278,38 @@ export async function sendUserChatMessage(formData) {
 
       revalidatePath('/chat');
       revalidatePath('/admin/messages');
-      return { success: true };
+      redirect('/chat?status=sent');
     } catch (error) {
       console.error('Failed to send chat message:', error);
-      return { success: false, error: 'Could not send your message right now.' };
+      redirect('/chat?status=error&message=Could%20not%20send%20your%20message%20right%20now.');
     }
   }
 
-  return { success: false, error: 'Unauthorized route for user chat.' };
+  redirect('/chat?status=error&message=Unauthorized%20route%20for%20user%20chat.');
 }
 
 export async function getUserChatProfile() {
   try {
-    const threadId = await getChatThreadId();
+    const authenticatedUser = await getChatAuthenticatedUser();
+    if (!authenticatedUser) {
+      return { name: '', email: '' };
+    }
+
+    const threadId = authenticatedUser.threadId;
     const cookieProfile = await getChatProfileFromCookies();
 
     if (!threadId) {
-      return cookieProfile;
+      return {
+        name: authenticatedUser.name || cookieProfile.name || '',
+        email: authenticatedUser.email || cookieProfile.email || '',
+      };
     }
 
     const client = await clientPromise;
     const db = client.db('portfolio');
 
-    if (cookieProfile.email) {
-      await attachLegacyContactsByEmailToThread(db, threadId, cookieProfile.email);
+    if (authenticatedUser.email) {
+      await attachLegacyContactsByEmailToThread(db, threadId, authenticatedUser.email);
     }
 
     const latestUserMessage = await db.collection('chat_messages').findOne(
@@ -279,8 +321,8 @@ export async function getUserChatProfile() {
     );
 
     return {
-      name: latestUserMessage?.name || cookieProfile.name || '',
-      email: latestUserMessage?.email || cookieProfile.email || '',
+      name: authenticatedUser.name || cookieProfile.name || latestUserMessage?.name || '',
+      email: authenticatedUser.email || cookieProfile.email || latestUserMessage?.email || '',
     };
   } catch {
     return { name: '', email: '' };
@@ -289,18 +331,19 @@ export async function getUserChatProfile() {
 
 export async function getUserChatMessages() {
   try {
-    const threadId = await getChatThreadId();
-    if (!threadId) {
+    const authenticatedUser = await getChatAuthenticatedUser();
+    if (!authenticatedUser || !authenticatedUser.threadId) {
       return [];
     }
 
+    const threadId = authenticatedUser.threadId;
+
     const client = await clientPromise;
     const db = client.db('portfolio');
-    const cookieProfile = await getChatProfileFromCookies();
 
     await backfillLegacyContactsToChat(db);
-    if (cookieProfile.email) {
-      await attachLegacyContactsByEmailToThread(db, threadId, cookieProfile.email);
+    if (authenticatedUser.email) {
+      await attachLegacyContactsByEmailToThread(db, threadId, authenticatedUser.email);
     }
 
     await db.collection('chat_messages').updateMany(
@@ -390,6 +433,56 @@ export async function getAdminChatThreads() {
   } catch (error) {
     console.error('Failed to fetch admin chat threads:', error);
     return [];
+  }
+}
+
+export async function logoutChatUserSession() {
+  await clearChatAuthenticatedSession();
+  redirect('/chat/auth');
+}
+
+export async function deleteUserChatConversation() {
+  const authenticatedUser = await getChatAuthenticatedUser();
+
+  if (!authenticatedUser || !authenticatedUser.threadId || !authenticatedUser.email) {
+    redirect('/chat/auth?error=Please%20login%20again%20to%20delete%20your%20chat.');
+  }
+
+  try {
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    await deleteChatConversation(db, authenticatedUser.threadId);
+    await clearChatThreadCookie();
+    revalidatePath('/chat');
+    revalidatePath('/admin/messages');
+    redirect('/chat?status=deleted');
+  } catch (error) {
+    console.error('Failed to delete user chat conversation:', error);
+    redirect('/chat?status=error&message=Could%20not%20delete%20your%20chat%20right%20now.');
+  }
+}
+
+export async function deleteAdminChatConversation(threadId) {
+  if (!(await isAdminAuthenticated())) {
+    return { success: false, error: 'Unauthorized' };
+  }
+
+  const normalizedThreadId = String(threadId || '').trim();
+
+  if (!normalizedThreadId) {
+    return { success: false, error: 'Invalid thread.' };
+  }
+
+  try {
+    const client = await clientPromise;
+    const db = client.db('portfolio');
+    await deleteChatConversation(db, normalizedThreadId);
+    revalidatePath('/chat');
+    revalidatePath('/admin/messages');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to delete admin chat conversation:', error);
+    return { success: false, error: 'Could not delete this conversation.' };
   }
 }
 

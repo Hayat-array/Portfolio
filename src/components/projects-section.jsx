@@ -21,6 +21,8 @@ export function ProjectsSection({ projects = [] }) {
       ? projects
       : projects.filter((p) => p.category === activeCategory);
 
+  const getProjectUrl = (project) => project.website || project.link || '#';
+
   return (
     <Section id="projects" className="fade-in-up">
       <div className="text-center ">
@@ -70,7 +72,7 @@ export function ProjectsSection({ projects = [] }) {
                   ))}
                 </div>
                 <Button asChild variant="outline" className="w-full">
-                  <Link href={project.link || "#"} target="_blank">
+                  <Link href={getProjectUrl(project)} target="_blank" rel="noopener noreferrer">
                     View Project <ExternalLink className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

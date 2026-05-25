@@ -47,6 +47,15 @@ export const initialProjects = [
         aiHint: "Full-stack AI assistant with voice interaction, Perplexity Sonar Pro API, Flask backend, MongoDB persistence, dual voice modes, code highlighting, and premium UI"
     },
     {
+        title: "PDF Summarizer",
+        description: "A smart PDF processing web app built with Flask, MongoDB, HTML, CSS, JavaScript, and Python PDF libraries. It extracts long documents and generates concise summaries through a clean, responsive interface designed for fast reading and easy sharing.",
+        image: "/hayat.png",
+        tags: ["Flask", "MongoDB", "Python", "PDF Libraries", "HTML5", "CSS3", "JavaScript"],
+        category: "Web App",
+        link: "https://pdf-summarizer-ten-kappa.vercel.app/",
+        aiHint: "PDF summarization app with Flask backend, MongoDB storage, and document processing"
+    },
+    {
         title: "Gesture-Controlled Game",
         description: "Control games using hand gestures via webcam tracking.",
         image: "/projects/gesture-control.png",

@@ -2,6 +2,7 @@ import { Bell, CheckCircle2, MessageCircleReply } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
 import {
+  deleteAdminChatConversation,
   getAdminChatThreads,
   markThreadAsReadByAdmin,
   sendAdminChatReply,
@@ -27,6 +28,7 @@ function formatDate(value) {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'medium',
     timeStyle: 'short',
+    timeZone: 'UTC',
   }).format(date);
 }
 
@@ -134,6 +136,11 @@ export default async function AdminMessagesPage() {
                         </Button>
                       </form>
                     )}
+                    <form action={deleteAdminChatConversation.bind(null, thread.threadId)}>
+                      <Button type="submit" variant="destructive" size="sm">
+                        Delete Thread
+                      </Button>
+                    </form>
                   </div>
 
                   <form action={sendAdminChatReply} className="space-y-2">

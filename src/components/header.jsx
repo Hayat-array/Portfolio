@@ -299,7 +299,7 @@
 // }
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -314,31 +314,19 @@ import { ThemeToggle } from './theme-toggle';
 
 // ✅ Nav Links with labels + icons
 const navLinks = [
-  { href: '#home', label: 'Home', icon: Home },
-  { href: '#skills', label: 'Skills', icon: Code },
-  { href: '#projects', label: 'Projects', icon: Folder },
-  { href: '#resume-tool', label: 'Certificates', icon: Award },
-  { href: '#about', label: 'About', icon: User },
-  { href: '/resume/Hayat_Ali_Resume.pdf', label: 'Resume', icon: FileText },
+  { href: '/#home', label: 'Home', icon: Home },
+  { href: '/#skills', label: 'Skills', icon: Code },
+  { href: '/#projects', label: 'Projects', icon: Folder },
+  { href: '/#resume-tool', label: 'Certificates', icon: Award },
+  { href: '/#about', label: 'About', icon: User },
+  { href: '/resumes', label: 'Resumes', icon: FileText },
   { href: '/chat', label: 'Chat', icon: MessageCircle },
-  { href: '#contact', label: 'Contact', icon: Mail },
+  { href: '/#contact', label: 'Contact', icon: Mail },
   { href: '/admin/login', label: 'Admin', icon: Shield },
 ];
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // ✅ NavLink with animation
   const NavLink = ({ href, label, icon: Icon, isMobile = false }) => (
@@ -382,13 +370,7 @@ export function Header() {
 
   return (
     <header
-      suppressHydrationWarning
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        mounted && isScrolled
-          ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm'
-          : 'bg-background/90 backdrop-blur-sm md:bg-transparent'
-      )}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
     >
       <div className="container px-4 mx-auto">
         <div className="grid grid-cols-3 items-center h-16 gap-4">
@@ -396,7 +378,7 @@ export function Header() {
           {/* 🔹 Logo */}
           <div className="flex items-center justify-start">
             <Link
-              href="#home"
+              href="/#home"
               className="flex items-center gap-2 text-lg font-bold text-foreground hover:text-primary transition-colors"
             >
               <img className="w-8 h-8" src="/favico.png" alt="Logo" />
